@@ -1,0 +1,87 @@
+# Fractal Neural Network with Mamba Architecture
+
+This project implements a neural network that uses recursive probabilistic fractals in each layer, integrated with the Mamba architecture. The model processes byte data using a byte tokenizer and can generate a specific number of fractals per layer with configurable depth and dimensions.
+
+## Project Structure
+
+```
+├── checkpoints/       # Saved model checkpoints during training
+├── data/              # Input data for training and testing
+├── evaluation/        # Code for evaluating model performance
+├── fractal_model/     # Core model architecture and components
+├── README.md          # This file
+├── training/          # Training scripts and utilities
+└── utils/             # Helper functions and utilities
+```
+
+## Requirements
+
+- Python 3.8+
+- PyTorch 2.0+
+- NumPy
+- tqdm
+- matplotlib
+- einops
+- causal-conv1d (for Mamba implementation)
+
+## Setup
+
+1. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. Prepare your data:
+   - Place your byte data files in the `data/` directory
+   - Run preprocessing if needed: `python utils/preprocess_data.py`
+
+## Training
+
+```bash
+python training/train.py --config configs/default.yaml
+```
+
+Key configuration options:
+- `--fractal_count`: Number of fractals per layer
+- `--fractal_depth_range`: Range for random fractal depth (min,max)
+- `--fractal_dim_range`: Range for random fractal dimensions (min,max)
+- `--batch_size`: Batch size for training
+- `--epochs`: Number of training epochs
+- `--learning_rate`: Initial learning rate
+- `--checkpoint_dir`: Directory to save checkpoints
+- `--device`: Device to use (cuda or cpu)
+
+## Inference
+
+```bash
+python evaluation/inference.py --model_path checkpoints/best_model.pt --input_file your_input_file
+```
+
+## Model Architecture
+
+The model combines fractal-based processing with the Mamba architecture:
+
+1. Byte tokenization of input data
+2. Embedding layer
+3. Multiple layers of fractal processing
+   - Each layer contains a configurable number of fractal modules
+   - Fractal modules have random depth and dimensions within specified ranges
+4. Mamba selective state space sequence model
+5. Output layer
+
+## License
+
+MIT License
+
+## Citation
+
+If you use this code in your research, please cite:
+
+```
+@software{fractal_neural_network,
+  author = {Your Name},
+  title = {Fractal Neural Network with Mamba Architecture},
+  year = {2025},
+  url = {https://github.com/yourusername/fractal-neural-network}
+}
+```
